@@ -1,0 +1,134 @@
+<div class="conversation-outer">
+  <!-- Header with title -->
+  <div class="header">
+    <span class="brand-title">Cognitive Assessment for Alzheimer</span>
+  </div>
+  <div class="start-over-row">
+    <button class="start-over-btn" (click)="startOver()" title="Start Over">
+      <span class="material-icons">restart_alt</span> Start Over
+    </button>
+  </div>
+
+  <!-- Progress Bar (separates header and body) -->
+  <div class="progress-container">
+    <div class="progress-bar" [style.width.%]="progress"></div>
+  </div>
+
+  <!-- Chat Messages Container -->
+  <div class="chat-messages" #scrollContainer>
+    <!-- Message pairs (bot question + user answer) -->
+    <div class="message-pair" *ngFor="let msg of conversationPairs; let i = index">
+      <!-- Bot Message -->
+      <div class="message-wrapper bot">
+        <div class="avatar-container">
+          <img src="assets/avatar.jpg" alt="Medibot Avatar" class="avatar">
+        </div>
+        <div class="message-content">
+          <div class="medibot-label">Medibot</div>
+          <div class="question-row">
+            <div class="message">{{ msg.question }}</div>
+            <button type="button" class="speaker-btn" (click)="speakQuestion(msg.question)" title="Speak question">
+              <span class="material-icons">volume_up</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- User Response (if any) -->
+      <div class="message-wrapper user" *ngIf="msg.answer">
+        <div class="user-bubble">
+          <div class="answer-bubble">{{ msg.answer }}</div>
+          <button class="edit-answer-btn" (click)="editAnswer(msg.questionId)" title="Edit answer">
+            <span class="material-icons">edit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Current Question (if not answered yet) -->
+    <div class="message-wrapper bot" *ngIf="currentQuestion && !answerSubmitted">
+      <div class="avatar-container">
+        <img src="assets/avatar.jpg" alt="Medibot Avatar" class="avatar">
+      </div>
+      <div class="message-content">
+        <div class="medibot-label">Medibot</div>
+        <div class="question-row">
+          <div class="message">{{ currentQuestion.text }}</div>
+          <button type="button" class="speaker-btn" (click)="speakQuestion(currentQuestion.text)" title="Speak question">
+            <span class="material-icons">volume_up</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="input-container" *ngIf="!answerSubmitted">
+    <div *ngIf="invalidOption" class="invalid-option-message">
+      Please select a valid option
+    </div>
+    
+    <!-- Multiple Choice Options -->
+    <div *ngIf="currentQuestion?.options?.length" class="options-container">
+      <button
+        *ngFor="let opt of currentQuestion.options"
+        type="button"
+        class="option-btn"
+        [class.selected]="currentAnswer === opt"
+        (click)="selectAnswer(opt)"
+        [disabled]="isListening"
+      >
+        {{ opt }}
+      </button>
+      <div class="microphone-container">
+        <button type="button" (click)="listen()" class="mic-btn" [class.listening]="isListening">
+          <span class="material-icons">{{isListening ? 'mic' : 'mic_none'}}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Number Input -->
+    <div *ngIf="currentQuestion?.type === 'number' && !currentQuestion?.options" class="text-input-wrapper">
+      <div class="text-input-container">
+        <input 
+          type="number" 
+          [(ngModel)]="currentAnswer" 
+          (input)="onManualAnswerChange()" 
+          class="text-input" 
+          placeholder="Enter your answer..."
+          [disabled]="isListening"
+        />
+        <div class="microphone-container">
+          <button type="button" (click)="listen()" class="mic-btn" [class.listening]="isListening">
+            <span class="material-icons">{{isListening ? 'mic' : 'mic_none'}}</span>
+          </button>
+        </div>
+        <button class="send-btn" (click)="submitAnswer()" [disabled]="!isAnswerValid() || isListening">
+          <span class="material-icons">send</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Text Input -->
+    <div *ngIf="currentQuestion?.type === 'text' && !currentQuestion?.options" class="text-input-wrapper">
+      <div class="text-input-container">
+        <input 
+          type="text" 
+          [(ngModel)]="currentAnswer" 
+          (input)="onManualAnswerChange()" 
+          class="text-input" 
+          placeholder="Type your answer..."
+          [disabled]="isListening"
+        />
+        <div class="microphone-container">
+          <button type="button" (click)="listen()" class="mic-btn" [class.listening]="isListening">
+            <span class="material-icons">{{isListening ? 'mic' : 'mic_none'}}</span>
+          </button>
+        </div>
+        <button class="send-btn" (click)="submitAnswer()" [disabled]="!isAnswerValid() || isListening">
+          <span class="material-icons">send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

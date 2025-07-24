@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+.form-container, .question-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.avatar {
+  width: 100px;
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.answer-box {
+  background-color: #f0e7db;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.btn-row button {
+  margin: 5px;
+  padding: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.avatar-small {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.mic-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Common utility and button styles moved from conversation-screen.component.scss
+.speaker-btn, .edit-answer-btn, .start-over-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.speaker-btn:hover, .edit-answer-btn:hover, .start-over-btn:hover {
+  color: #1d4ed8;
+  background: rgba(30,64,175,.07);
+}
+.speaker-btn .material-icons, .edit-answer-btn .material-icons, .start-over-btn .material-icons {
+  color: inherit;
+  font-size: 1.2rem;
+}
+.option-btn[disabled], .text-input[disabled], .send-btn[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
