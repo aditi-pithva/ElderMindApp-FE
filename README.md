@@ -10,7 +10,7 @@ ElderMind is a user-friendly Angular web application designed to collect cogniti
 - Final AI-powered analysis based on user inputs
 - Integration-ready with Flask-based LLM backend
 
-## etting Started
+## Getting Started
 
 ### Prerequisites
 
