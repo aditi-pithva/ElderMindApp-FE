@@ -1,27 +1,53 @@
-# ElderMindMapUi
+# ElderMindApp-FE
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+ElderMind is a user-friendly Angular web application designed to collect cognitive, behavioral, and medical inputs from users to assist in the early detection of Alzheimer's disease. The interface is structured around an interactive chatbot that guides users through a series of questions, with results powered by a backend LLM.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Chat-style questionnaire flow
+- Covers demographics, cognitive functions, psychological symptoms, motor issues, and more
+- Dynamic rendering of questions with dropdowns, yes/no, and numeric inputs
+- Final AI-powered analysis based on user inputs
+- Integration-ready with Flask-based LLM backend
 
-## Code scaffolding
+## etting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- [Node.js](https://nodejs.org/en/) (v16 or later recommended)
+- [Angular CLI](https://angular.io/cli)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+```bash
+git clone https://github.com/aditi-pithva/ElderMindApp-FE.git
+cd ElderMindApp-FE
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Run the App
 
-## Running end-to-end tests
+```bash
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Navigate to `http://localhost:4200/` in your browser.
 
-## Further help
+## Project Structure
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `src/app/components` – UI components (chat interface, question cards, etc.)
+- `src/app/services` – Communication layer for backend integration
+- `src/app/constants/questions.ts` – Full list of categorized medical questions
+- `src/assets` – Static assets and styles
+
+## Backend
+
+Make sure the Flask backend is running (e.g., `/generate` endpoint) and update the API URL in the Angular service if needed.
+
+## License
+
+This project is under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+>  **Disclaimer:** This application is not a diagnostic tool. It is intended for preliminary guidance and awareness only. Please consult a medical professional for official evaluation.
